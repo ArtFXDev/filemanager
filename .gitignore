@@ -1,0 +1,6 @@
+*.pyc
+config.ini
+.idea*
+
+conf/global_pass.py
+.idea/workspace.xml

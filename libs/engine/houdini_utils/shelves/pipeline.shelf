@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <shelfSet name="pipeline" label="Pipeline"/>
+
+  <toolshelf name="shelf_pipeline" label="Pipeline">
+    <memberTool name="save"/>
+    <memberTool name="publish"/>
+    <memberTool name="fm"/>
+    <memberTool name="flipbook"/>
+    <memberTool name="create"/>
+    <memberTool name="conform"/>
+    <memberTool name="last_file"/>
+  </toolshelf>
+
+  <tool name="fm" label="File Manageur" icon="//multifct/tools/pipeline/global/misc/icons/filemanager.png">
+    <script scriptType="python"><![CDATA[
+from pipeline.libs.utils import clear
+clear.do()
+
+from pipeline.tools import filemanager as fm
+fm.launch()
+]]></script>
+  </tool>
+
+  <tool name="flipbook" label="Flipbook" icon="//multifct/tools/pipeline/global/misc/icons/flipbook.png">
+    <script scriptType="python"><![CDATA[from pipeline.libs.engine.houdini_utils import flipbook 
+flipbook.launch()
+]]></script>
+  </tool>
+
+  <tool name="save" label="Save" icon="//multifct/tools/pipeline/global/misc/icons/save.png">
+    <script scriptType="python"><![CDATA[from pipeline.tools import save
+save.save()
+]]></script>
+  </tool>
+
+  <tool name="publish" label="Publish" icon="//multifct/tools/pipeline/global/misc/icons/publish.png">
+    <script scriptType="python"><![CDATA[from pipeline.tools import save
+save.publish()
+]]></script>
+  </tool>
+
+  <tool name="create" label="Create" icon="//multifct/tools/pipeline/global/misc/icons/create.png">
+    <script scriptType="python"><![CDATA[from pipeline.tools.filemanager.ui import create_UI_window as cw_win
+create_file_win = cw_win.CreateWindow()
+create_file_win.show()
+]]></script>
+  </tool>
+
+  <tool name="conform" label="Conform" icon="//multifct/tools/pipeline/global/misc/icons/conform.png">
+    <script scriptType="python"><![CDATA[from pipeline.tools.filemanager.ui import conform_UI_window as cow_win
+conform_file_win = cow_win.ConformWindow()
+conform_file_win.show()
+]]></script>
+  </tool>
+
+  <tool name="last_file" label="Last File" icon="//multifct/tools/pipeline/global/misc/icons/return.png">
+    <script scriptType="python"><![CDATA[from pipeline import conf
+import hou
+hou.hipFile.load(conf.get("last_hou_file"), suppress_save_prompt=True)
+]]></script>
+  </tool>
+</shelfDocument>
